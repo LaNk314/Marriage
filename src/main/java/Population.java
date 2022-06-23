@@ -35,8 +35,14 @@ public class Population {
     }
 
     public void findUnengagedMales(){
+//        unengagedMales.addAll(male);
+//        unengagedMales.removeIf(male -> femalesPartner.contains(male));
         unengagedMales.addAll(male);
-        unengagedMales.removeIf(male -> femalesPartner.contains(male));
+        for(String male : femalesPartner){
+            if (!male.equals("None")){
+                unengagedMales.remove(male);
+            }
+        }
     }
 
     private void generatePreferences() {
@@ -62,14 +68,17 @@ public class Population {
 //            }
 //        }
         findUnengagedMales();
-        while (!unengagedMales.isEmpty()){
+        while (femalesPartner.contains("None")){
             for(String male : unengagedMales){
                 int hisIndex = male.indexOf(male);
-                for(String female : malesPref.get(hisIndex))
-                if(propose(male, female)){
-                    break;
+                for(String female : malesPref.get(hisIndex)) {
+                    if (propose(male, female)) {
+                        break;
+                    }
+
                 }
             }
+            findUnengagedMales();
             System.out.println("loop");
         }
     }

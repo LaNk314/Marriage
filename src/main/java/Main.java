@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        Population populacja = new Population(25);
+        Population populacja = new Population(5);
 //        for(String man : populacja.man) System.out.print(man +", ");
 //        System.out.print("\n");
 //        for(String woman : populacja.woman) System.out.print(woman + ", ");
@@ -13,11 +16,17 @@ public class Main {
 //        }
 
         populacja.findStableMatches();
-        for(String male : populacja.male){
-            System.out.print(male + ", ");
+        int j = 0;
+        for(List<String> female : populacja.malesPref) {
+            System.out.println((j+1)+". Male preferences: " + female);
+            j++;
         }
-
-
+        System.out.println("Female preferences: "+populacja.femalesPref);
+        int k = 0;
+        for(String male : populacja.femalesPartner){
+            System.out.println(populacja.female.get(k) + " matched with " + male);
+            k++;
+        }
 
 
 
